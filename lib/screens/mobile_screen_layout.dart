@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/colors.dart';
 import 'package:whatsapp_clone/widgets/contacts_lists.dart';
 
-
 class MobileScreenLayout extends StatelessWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
 
@@ -11,50 +10,12 @@ class MobileScreenLayout extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: appBarColor,
-          elevation: 0,
-          title: const Text(
-            'WhatsApp',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.camera_alt_outlined),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.more_vert),
-            )
-          ],
-          bottom: const TabBar(
-            indicatorColor: tabColor,
-            indicatorWeight: 4,
-            labelColor: tabColor,
-            unselectedLabelColor: Colors.grey,
-            tabs: [
-              Tab(text: 'Chats'),
-              Tab(text: 'Status'),
-              Tab(text: 'Calls'),
-            ],
-          ),
-        ),
-        body:const  TabBarView(
+        appBar: buildAppBar(context),
+        body:  TabBarView(
           children: [
-            ContactsList(), 
-            StatusScreen(), 
+            ContactsList(),
+            StatusScreen(),
             CallScreen(),
-
-            
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -65,9 +26,83 @@ class MobileScreenLayout extends StatelessWidget {
       ),
     );
   }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: appBarColor,
+      elevation: 0,
+      title: const Text(
+        'WhatsApp', // You can make this dynamic
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            // Handle camera button click
+          },
+          icon: const Icon(Icons.camera_alt_outlined),
+        ),
+        IconButton(
+          onPressed: () {
+            // Handle search button click
+          },
+          icon: const Icon(Icons.search),
+        ),
+        buildPopupMenuButton(context), // Add the PopupMenuButton here
+      ],
+      bottom: const TabBar(
+        indicatorColor: tabColor,
+        indicatorWeight: 4,
+        labelColor: tabColor,
+        unselectedLabelColor: Colors.grey,
+        tabs: [
+          Tab(text: 'Chats'),
+          Tab(text: 'Status'),
+          Tab(text: 'Calls'),
+        ],
+      ),
+    );
+  }
+
+  PopupMenuButton<String> buildPopupMenuButton(BuildContext context) {
+    return PopupMenuButton<String>(
+      onSelected: (value) {
+        // Handle the selected option
+        print('Selected: $value');
+      },
+      itemBuilder: (BuildContext context) {
+        return [
+          PopupMenuItem<String>(
+            value: 'New Group',
+            child: Text('New group'),
+          ),
+          PopupMenuItem<String>(
+            value: 'Option 2',
+            child: Text('New broudcast'),
+          ),
+          PopupMenuItem<String>(
+            value: 'Option 3',
+            child: Text('Linked devices'),
+          ),
+          PopupMenuItem<String>(
+            value: 'Option 4',
+            child: Text('strared messages'),
+          ),
+          PopupMenuItem<String>(
+            value: 'Option 5',
+            child: Text('settings'),
+          ),
+        ];
+      },
+      icon: const Icon(Icons.more_vert),
+    );
+  }
 }
 
-// Example StatusScreen widget (you can create a separate file for this)
 class StatusScreen extends StatelessWidget {
   const StatusScreen({super.key});
 
