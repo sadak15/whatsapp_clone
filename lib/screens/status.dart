@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:whatsapp_clone/colors.dart';
 import 'package:whatsapp_clone/widgets/contacts_lists.dart';
 
-class MobileScreenLayout extends StatelessWidget {
-  const MobileScreenLayout({super.key});
-  
+class Status extends StatelessWidget {
+  const Status({super.key});
+
   @override
   Widget build(BuildContext context) {
     return  DefaultTabController(
@@ -45,7 +46,6 @@ class MobileScreenLayout extends StatelessWidget {
         ),
         body: const ContactsList(),
         floatingActionButton: FloatingActionButton(
-          
           onPressed: (){},
           backgroundColor: tabColor,
           child:const Icon(Icons.comment, color: Colors.white, ),
